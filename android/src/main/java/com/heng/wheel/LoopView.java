@@ -393,7 +393,19 @@ public class LoopView extends View {
   }
 
   public void setSelectedIndex(int selectedIndex) {
+    Log.d("Picker", "LoopView setSelectedIndex: " + selectedIndex + "; preCurrentIndex: " + preCurrentIndex);
+
+    if (selectedIndex != preCurrentIndex) {
+      preCurrentIndex = this.selectedIndex;
+      totalScrollY = 0;
+    }
+
     this.selectedIndex = selectedIndex;
+
+    if (selectedIndex != preCurrentIndex) {
+      remeasure();
+      invalidate();
+    }
   }
 
   public void setVelocityFling(int velocityFling) {
