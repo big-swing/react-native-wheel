@@ -302,6 +302,7 @@ public class LoopView extends View {
     switch (event.getAction()) {
     case MotionEvent.ACTION_DOWN:
       startTime = System.currentTimeMillis();
+      totalScrollY = 0;
       cancelFuture();
       previousY = event.getRawY();
       break;
