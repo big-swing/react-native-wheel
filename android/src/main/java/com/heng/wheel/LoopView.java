@@ -45,7 +45,7 @@ public class LoopView extends View {
 
   int maxTextWidth;
 
-  int maxTextHeight;
+  int maxTextHeight = 32;
   int colorGray = 0xffafafaf;
   int colorBlack = 0xff313131;
 
@@ -127,7 +127,8 @@ public class LoopView extends View {
     paintCenterText.setTypeface(Typeface.SANS_SERIF);
 
     paintIndicator = new Paint();
-    paintIndicator.setColor(colorLightGray);
+    paintIndicator.setColor(colorGray);
+    paintIndicator.setStrokeWidth(2.0F);
     paintIndicator.setAntiAlias(true);
 
     if (android.os.Build.VERSION.SDK_INT >= 11) {
@@ -174,10 +175,6 @@ public class LoopView extends View {
       int textWidth = rect.width();
       if (textWidth > maxTextWidth) {
         maxTextWidth = textWidth;
-      }
-      int textHeight = rect.height();
-      if (textHeight > maxTextHeight) {
-        maxTextHeight = textHeight;
       }
     }
   }
@@ -246,6 +243,7 @@ public class LoopView extends View {
         int translateY = (int) (radius - Math.cos(radian) * radius - (Math.sin(radian) * maxTextHeight) / 2D);
         canvas.translate(0.0F, translateY);
         canvas.scale(1.0F, (float) Math.sin(radian));
+
         String text = as[j1];
         if (translateY <= firstLineY && maxTextHeight + translateY >= firstLineY) {
           // 条目经过第一条线
@@ -292,6 +290,7 @@ public class LoopView extends View {
     bounds.bottom = paint.descent() - paint.ascent();
     bounds.top += (rect.height() - bounds.bottom) / 2.0f;
     xy[1] = bounds.top - paint.ascent();
+
     return xy;
   }
 
@@ -299,6 +298,7 @@ public class LoopView extends View {
   public boolean onTouchEvent(MotionEvent event) {
     boolean eventConsumed = gestureDetector.onTouchEvent(event);
     float itemHeight = lineSpacingMultiplier * maxTextHeight;
+
     switch (event.getAction()) {
     case MotionEvent.ACTION_DOWN:
       startTime = System.currentTimeMillis();
@@ -322,6 +322,7 @@ public class LoopView extends View {
           totalScrollY = (int) bottom;
         }
       }
+
       break;
 
     case MotionEvent.ACTION_UP:
