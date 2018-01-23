@@ -21,6 +21,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import android.util.Log;
 
 public class LoopView extends View {
 
@@ -48,7 +49,7 @@ public class LoopView extends View {
   int maxTextHeight = 32;
   int colorGray = 0xffafafaf;
   int colorBlack = 0xff313131;
-
+  int colorWhite = 0xFFFFFFFF;
   int colorLightGray = 0xffc5c5c5;
 
   float lineSpacingMultiplier;
@@ -127,7 +128,7 @@ public class LoopView extends View {
     paintCenterText.setTypeface(Typeface.SANS_SERIF);
 
     paintIndicator = new Paint();
-    paintIndicator.setColor(colorGray);
+    paintIndicator.setColor(colorWhite);
     paintIndicator.setStrokeWidth(2.0F);
     paintIndicator.setAntiAlias(true);
 
@@ -226,6 +227,7 @@ public class LoopView extends View {
       }
       k1++;
     }
+
     canvas.drawLine(0.0F, firstLineY, mViewWidth, firstLineY, paintIndicator);
     canvas.drawLine(0.0F, secondLineY, mViewWidth, secondLineY, paintIndicator);
     int j1 = 0;
