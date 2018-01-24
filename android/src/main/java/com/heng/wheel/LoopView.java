@@ -143,6 +143,7 @@ public class LoopView extends View {
     remeasure();
     mViewWidth = getMeasuredWidth();
     setMeasuredDimension(mViewWidth, mViewHeight);
+    Log.d("Picker", "mViewHeight: " + heightMeasureSpec);
   }
 
   private void remeasure() {
@@ -189,6 +190,7 @@ public class LoopView extends View {
     String as[] = new String[itemsVisible];
     change = (int) (totalScrollY / (lineSpacingMultiplier * maxTextHeight));
     preCurrentIndex = selectedIndex + change % items.size();
+
     if (!isLoop) {
       if (preCurrentIndex < 0) {
         preCurrentIndex = 0;
@@ -410,6 +412,10 @@ public class LoopView extends View {
 
   public void setVelocityFling(int velocityFling) {
     this.mVelocityFling = velocityFling;
+  }
+
+  public void setRowHeight(int height) {
+    this.maxTextHeight = height;
   }
 
   public void onReceiveNativeEvent(int index) {
